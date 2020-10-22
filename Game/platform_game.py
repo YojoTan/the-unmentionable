@@ -1,11 +1,7 @@
 # Platform Game
 import pygame as pg
-import numpy as np
-import random
-import os
-import time
-from settings import *
-from pygame.locals import *
+from Game.Load import *
+from Game.settings import *
 
 
 ######## Game class
@@ -16,7 +12,7 @@ class Player(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.velx = 0
         self.vely = 0
-        self.sprite_sheet = SpriteSheet(DIRECCION + 'adventurer-Sheet.png')
+        self.sprite_sheet = SpriteSheet(adventure_sheet)
         self.load_images()
         self.image = self.standing_frames[0]
         self.image.set_colorkey(BLACK)
@@ -394,37 +390,34 @@ pg.init()
 pg.mixer.init()
 
 # initialize game window and load game graphics
-pg.display.set_caption(TITLE)
-WINDOW_SIZE = (WIDTH, HEIGHT)
-screen = pg.display.set_mode(WINDOW_SIZE, 0, 32)
-bg = pg.image.load(DIRECCION + 'bg.png').convert()
+bg = bg_Ld
 bg_rect = bg.get_rect()
 tile_list = []
 
-tile_floor_1 = pg.transform.scale(pg.image.load(DIRECCION + '1.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_2 = pg.transform.scale(pg.image.load(DIRECCION + '2.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_3 = pg.transform.scale(pg.image.load(DIRECCION + '3.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_4 = pg.transform.scale(pg.image.load(DIRECCION + '4.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_5 = pg.transform.scale(pg.image.load(DIRECCION + '5.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_6 = pg.transform.scale(pg.image.load(DIRECCION + '6.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_7 = pg.transform.scale(pg.image.load(DIRECCION + '7.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_8 = pg.transform.scale(pg.image.load(DIRECCION + '8.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_9 = pg.transform.scale(pg.image.load(DIRECCION + '9.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_10 = pg.transform.scale(pg.image.load(DIRECCION + '10.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_11 = pg.transform.scale(pg.image.load(DIRECCION + '11.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_12 = pg.transform.scale(pg.image.load(DIRECCION + '12.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_13 = pg.transform.scale(pg.image.load(DIRECCION + '13.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_14 = pg.transform.scale(pg.image.load(DIRECCION + '14.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_15 = pg.transform.scale(pg.image.load(DIRECCION + '15.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_16 = pg.transform.scale(pg.image.load(DIRECCION + '16.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_17 = pg.transform.scale(pg.image.load(DIRECCION + '17.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_18 = pg.transform.scale(pg.image.load(DIRECCION + '18.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
+tile_floor_1 = tile_floor_1_Ld
+tile_floor_2 = tile_floor_2_Ld
+tile_floor_3 = tile_floor_3_Ld
+tile_floor_4 = tile_floor_4_Ld
+tile_floor_5 = tile_floor_5_Ld
+tile_floor_6 = tile_floor_6_Ld
+tile_floor_7 = tile_floor_7_Ld
+tile_floor_8 = tile_floor_8_Ld
+tile_floor_9 = tile_floor_9_Ld
+tile_floor_10 = tile_floor_10_Ld
+tile_floor_11 = tile_floor_11_Ld
+tile_floor_12 = tile_floor_12_Ld
+tile_floor_13 = tile_floor_13_Ld
+tile_floor_14 = tile_floor_14_Ld
+tile_floor_15 = tile_floor_15_Ld
+tile_floor_16 = tile_floor_16_Ld
+tile_floor_17 = tile_floor_17_Ld
+tile_floor_18 = tile_floor_18_Ld
 
-tile_floor_bush1 = pg.transform.scale(pg.image.load(DIRECCION + 'Bush (4).png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_bush2 = pg.transform.scale(pg.image.load(DIRECCION + 'Bush (1).png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_stone = pg.transform.scale(pg.image.load(DIRECCION + 'stone.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_sing1 = pg.transform.scale(pg.image.load(DIRECCION + 'Sign_1.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
-tile_floor_sing2 = pg.transform.scale(pg.image.load(DIRECCION + 'Sign_2.png').convert(), (TILE_WIDTH, TILE_HEIGHT))
+tile_floor_bush1 = tile_floor_bush1_Ld
+tile_floor_bush2 = tile_floor_bush2_Ld
+tile_floor_stone = tile_floor_stone_Ld
+tile_floor_sing1 = tile_floor_sing1_Ld
+tile_floor_sing2 = tile_floor_sing2_Ld
 
 # initialize clock
 clock = pg.time.Clock()
