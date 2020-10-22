@@ -4,7 +4,7 @@ HEIGHT = 370
 TILE_WIDTH = 50
 TILE_HEIGHT = 37
 FPS = 60
-DIRECCION = '../1.platform_game/sprites/'
+DIRECCION = '../PlataformGame/Game/sprites/'
 # Player properties
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = 0.1
