@@ -132,7 +132,8 @@ class Player(pg.sprite.Sprite):
 
         # Floor
         if self.vely >= 0:
-            if collide(self.rect.x + 1, self.rect.y + TILE_HEIGHT) or collide(self.rect.x + TILE_WIDTH - 1, self.rect.y + TILE_HEIGHT):
+            if collide(self.rect.x + 1, self.rect.y + TILE_HEIGHT) or collide(self.rect.x + TILE_WIDTH - 1,
+                                                                              self.rect.y + TILE_HEIGHT):
                 fix_pos(1)
                 self.vely = 0
                 self.on_floor = True
@@ -142,7 +143,7 @@ class Player(pg.sprite.Sprite):
         # Ceiling
         if self.vely < 0:
             if collide(self.rect.x + 1, self.rect.y) or collide(self.rect.x + TILE_WIDTH - 1, self.rect.y):
-                #fix_pos(2)
+                # fix_pos(2)
                 self.vely = 0
         pg.draw.rect(screen, RED, self.hitBox, 2)
 
