@@ -275,14 +275,13 @@ def move_groups_assets(gens_bob, generadores_ratones, generadores_runners, playe
 
 def show_reward(id_v, player):
     moneda = random.randrange(100)
+    r = select_reward(moneda, 0, 0, player)
     if id_v == 1:
         r = select_reward(moneda, -100, 0, player)
     if id_v == 2:
         r = select_reward(moneda, 0, -100, player)
     if id_v == 3:
         r = select_reward(moneda, 100, 0, player)
-    if id_v == 0:
-        r = select_reward(moneda, 0, 0, player)
     return r
 
 
