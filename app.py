@@ -646,6 +646,7 @@ def activarcodigo(cheat):
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode([WIDHT, HEIGHT])
+    pygame.display.set_caption('The Unmentionable')
     fps = pygame.time.Clock()
     grupos = pygame.sprite.Group()
     #------------- Lectura del archivo----------#
