@@ -1,5 +1,5 @@
 import pygame
-from settings import *
+from classes.settings import *
 import random
 
 

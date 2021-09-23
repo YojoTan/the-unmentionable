@@ -1,11 +1,11 @@
 import pygame as pg
 import configparser
-from player_class import *
-from obstacles_class import *
-from settings import *
-from generators_class import *
+from classes.player_class import *
+from classes.obstacles_class import *
+from classes.settings import *
+from classes.generators_class import *
 from rewards import *
-from boss import *
+from classes.boss import *
 from inventario import *
 
 

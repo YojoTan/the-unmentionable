@@ -1,6 +1,6 @@
 import pygame
 import pygame.freetype
-from settings import *
+from classes.settings import *
 
 if __name__ == '__main__':
     pygame.init()
