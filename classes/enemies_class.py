@@ -2,7 +2,7 @@ import pygame as pg
 import pygame
 import random
 from random import shuffle
-from settings import *
+from classes.settings import *
 
 
 class Bob(pygame.sprite.Sprite):

@@ -1,6 +1,6 @@
-from player_class import *
+from classes.player_class import *
 import pygame as pg
-from settings import *
+from classes.settings import *
 import random
 
 

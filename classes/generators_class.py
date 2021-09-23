@@ -1,7 +1,7 @@
 import pygame
 import random
-from settings import *
-from enemies_class import *
+from classes.settings import *
+from classes.enemies_class import *
 
 
 class Generador_bobs(pygame.sprite.Sprite):

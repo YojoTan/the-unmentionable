@@ -1,6 +1,6 @@
 import pygame
 import random
-from generators_class import Activador, Pasillo
+from classes.generators_class import Activador, Pasillo
 vec = pygame.math.Vector2
 
 
