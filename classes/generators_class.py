@@ -15,10 +15,10 @@ class Generador_bobs(pygame.sprite.Sprite):
         self.velx = 0
         self.vely = 0
         self.pantalla = pantalla
-        self.doors = pygame.sprite.Group()      #Imagenes de las puertas
-        self.blocksDoor = pygame.sprite.Group() #Bloques de las puertas
-        self.bobs = pygame.sprite.Group()       #Bobs del generador
-        self.blocks = []                        #Bloques del mapa
+        self.doors = pygame.sprite.Group()  # Imagenes de las puertas
+        self.blocksDoor = pygame.sprite.Group()  # Bloques de las puertas
+        self.bobs = pygame.sprite.Group()  # Bobs del generador
+        self.blocks = []  # Bloques del mapa
         self.id = id
         self.zona = zona
         self.ls_type_animation_bob = l1
@@ -26,9 +26,9 @@ class Generador_bobs(pygame.sprite.Sprite):
         self.ls_to_animate_enemies = l3
         self.idsDoor = self.ids()
         self.cant_bobs = 0
-        self.temp_door = 100    #Temporizador para las puertas
-        self.ori = None         #Orientacion de las puertas de los generadores
-        self.temp = 200         #Temporizador para generar enemigos
+        self.temp_door = 100  # Temporizador para las puertas
+        self.ori = None  # Orientacion de las puertas de los generadores
+        self.temp = 200  # Temporizador para generar enemigos
         self.activated = False
         self.cant_votos = 0
 
@@ -41,14 +41,15 @@ class Generador_bobs(pygame.sprite.Sprite):
             return ['Q', 'Z']
 
     def update(self):
-        #Control sobre la generación de bobs
-        #print(self.temp)
+        # Control sobre la generación de bobs
+        # print(self.temp)
         if self.activated is True:
             if self.cant_bobs < 5:
                 if self.temp > 0:
                     self.temp -= 1
                 elif self.temp <= 0:
-                    bob = Bob(self.rect.center, self.ls_to_animate_bob, self.ls_type_animation_bob,self.ls_to_animate_enemies, self.pantalla)
+                    bob = Bob(self.rect.center, self.ls_to_animate_bob,
+                              self.ls_type_animation_bob, self.ls_to_animate_enemies, self.pantalla)
                     moneda = random.randrange(100)
                     if moneda < 25:
                         shuffle(self.ls_type_animation_bob)
@@ -57,7 +58,7 @@ class Generador_bobs(pygame.sprite.Sprite):
                         bob.q['0'] = 1
                         bob.q['1'] = 0
                     elif moneda < 50:
-                        bob.dir  = 3
+                        bob.dir = 3
                         bob.vely = -VELY_B
                         bob.q['0'] = 0
                         bob.q['2'] = 0
@@ -77,7 +78,7 @@ class Generador_bobs(pygame.sprite.Sprite):
                     self.bobs.add(bob)
                     self.temp = 200
                     self.cant_bobs += 1
-            #Control de las puertas
+            # Control de las puertas
             if self.temp_door > 0:
                 self.temp_door -= 1
             else:
@@ -101,7 +102,7 @@ class Generador_bobs(pygame.sprite.Sprite):
                             door.order = order
                         else:
                             door.order = order
-                        #print(door.dir)
+                        # print(door.dir)
                         door.update(True)
                 order = 0
                 for block in self.blocksDoor:
@@ -114,25 +115,25 @@ class Generador_bobs(pygame.sprite.Sprite):
                         block.update(True)
 
             elif self.temp_door == -99:
-                    #print("Close {}".format(self.ori))
+                # print("Close {}".format(self.ori))
 
-                    for door in self.doors:
-                        if door.dir == self.ori:
-                            door.update(True)
-                    #print(len(self.blocksDoor))
-                    for block in self.blocksDoor:
-                        if block.dir == self.ori:
-                            block.update(True)
+                for door in self.doors:
+                    if door.dir == self.ori:
+                        door.update(True)
+                # print(len(self.blocksDoor))
+                for block in self.blocksDoor:
+                    if block.dir == self.ori:
+                        block.update(True)
             for bob in self.bobs:
                 if bob.temp_death == 0:
-                    #print('Eliminar')
+                    # print('Eliminar')
                     self.bobs.remove(bob)
                     self.cant_bobs -= 1
 
         self.doors.update()
         self.rect.x += self.velx
         self.rect.y += self.vely
-        #self.bobs.update()  #Actualizacion de los bobs
+        # self.bobs.update()  #Actualizacion de los bobs
 
 
 class Generador_ratones(pygame.sprite.Sprite):
@@ -177,6 +178,7 @@ class Generador_ratones(pygame.sprite.Sprite):
         self.rect.x += self.velx
         self.rect.y += self.vely
 
+
 class Generador_runner(pygame.sprite.Sprite):
     def __init__(self, pos, ls, zona):
         pygame.sprite.Sprite.__init__(self)
@@ -200,30 +202,31 @@ class Generador_runner(pygame.sprite.Sprite):
                 if self.temp > 0:
                     self.temp -= 1
                 else:
-                    runner = Runner(self.rect.center, self.ls_to_animate_runners)
+                    runner = Runner(self.rect.center,
+                                    self.ls_to_animate_runners)
                     moneda = random.randrange(100)
                     self.cant_runners += 1
 
                     if moneda < 25:
                         runner.dir = 2
                         runner.velx = 5
-                        runner.q['0']=1
-                        runner.q['1']=0
+                        runner.q['0'] = 1
+                        runner.q['1'] = 0
                     elif moneda < 50:
-                        runner.dir  = 3
+                        runner.dir = 3
                         runner.vely = -5
-                        runner.q['0']=0
-                        runner.q['2']=0
+                        runner.q['0'] = 0
+                        runner.q['2'] = 0
                     elif moneda < 75:
-                        runner.dir  = 1
+                        runner.dir = 1
                         runner.velx = -5
-                        runner.q['0']=1
-                        runner.q['1']=0
+                        runner.q['0'] = 1
+                        runner.q['1'] = 0
                     else:
-                        runner.dir  = 0
+                        runner.dir = 0
                         runner.vely = 5
-                        runner.q['0']=0
-                        runner.q['2']=0
+                        runner.q['0'] = 0
+                        runner.q['2'] = 0
 
                     runner.blocks = self.blocks
                     self.runners.add(runner)
@@ -232,7 +235,7 @@ class Generador_runner(pygame.sprite.Sprite):
         self.runners.update()
 
         self.rect.x += self.velx
-        self.rect.y += self.vely         
+        self.rect.y += self.vely
 
 
 class Generador_votos(pygame.sprite.Sprite):
@@ -335,7 +338,7 @@ class Puesto_votacion(pygame.sprite.Sprite):
                 gen.ratones.empty()
             for gen in self.g_runns:
                 gen.activated = False
-                gen.runners.empty()                
+                gen.runners.empty()
             for gen in self.g_votos:
                 gen.activated = False
                 gen.votos.empty()
@@ -348,7 +351,7 @@ class Puesto_votacion(pygame.sprite.Sprite):
             for gen in self.g_ratas:
                 gen.activated = True
             for gen in self.g_runns:
-                gen.activated = True                
+                gen.activated = True
             for gen in self.g_votos:
                 gen.activated = True
             for torreta in self.torretas:
@@ -380,14 +383,16 @@ class Puesto_votacion(pygame.sprite.Sprite):
             self.idsActi = '7'
 
     def posicion(self):
-        #Retorna posicion
+        # Retorna posicion
         p = [self.rect.x, self.rect.y]
         return p
+
 
 class Pasillo(pygame.sprite.Sprite):
 
     def __init__(self, pos, matriz, id):
-        pygame.sprite.Sprite.__init__(self)  # Inicializacion del contructor de sprite
+        # Inicializacion del contructor de sprite
+        pygame.sprite.Sprite.__init__(self)
         self.matriz = matriz
         self.colum = 0
         self.row = 0
@@ -424,7 +429,7 @@ class ActivadorPasillo(pygame.sprite.Sprite):
         self.image = pygame.Surface(dimensiones)
         self.image.fill(color)
         self.rect = self.image.get_rect()
-        self.rect.x = pos[0]    #Defino su posicion
+        self.rect.x = pos[0]  # Defino su posicion
         self.rect.y = pos[1]
         self.velx = 0
         self.vely = 0
@@ -434,6 +439,7 @@ class ActivadorPasillo(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.velx
         self.rect.y += self.vely
+
 
 class Activador(pygame.sprite.Sprite):
 
@@ -453,10 +459,12 @@ class Activador(pygame.sprite.Sprite):
         self.rect.x += self.velx
         self.rect.y += self.vely
 
+
 class Laberinto(pygame.sprite.Sprite):
 
     def __init__(self, pos, matriz, id):
-        pygame.sprite.Sprite.__init__(self)  # Inicializacion del contructor de sprite
+        # Inicializacion del contructor de sprite
+        pygame.sprite.Sprite.__init__(self)
         self.matriz = matriz
         self.colum = 0
         self.row = 0
@@ -486,4 +494,4 @@ class Laberinto(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.x += self.velx
-        self.rect.y += self.vely      
+        self.rect.y += self.vely
