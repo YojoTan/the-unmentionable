@@ -84,13 +84,40 @@ class Inventario(pygame.sprite.Sprite):
         self.delete = None
         self.usage = None
         self.cursor = cursor
-        self.cant_elem = 6
+        self.cant_elem = 10
         self.botones = botones
         self.artefactos = pygame.sprite.Group()
         self.crear_casillas()
         self.mouse_press = False
         self.player = None
         self.gens_bobs = None
+        self.actions_to_execute = {
+            0 : lambda options: self.__increase_health(options),
+            1 : lambda options: self.__damage_bob(options),
+            3 : lambda options: self.__increase_cats(options),
+            7 : lambda : self.__increase_health(amount=HEALTH_PLAYER),
+        }
+
+    def __increase_health(self, **options):
+        amount = options.get('amount') or 10
+        if self.player.health < HEALTH_PLAYER and self.player.health > 0:
+            if self.player.health + amount > HEALTH_PLAYER:
+                self.player.health = HEALTH_PLAYER
+            else:
+                self.player.health += HEALTH_PLAYER
+    
+    def __damage_bob(self, **options):
+        amount = options.get('amount') or -3
+        for gen in self.gens_bob:
+            for bob in gen.bobs:
+                moneda = random.randrange(100)
+                if moneda > 50:
+                    bob.sound(self.damageBob)
+                    bob.health -= amount
+        
+    def __increase_cats(self, **options):
+        amount = options.get('amount') or 2;
+        self.player.cont_cats += amount
 
     def update(self):
         self.artefactos.draw(self.screen)
@@ -129,7 +156,7 @@ class Inventario(pygame.sprite.Sprite):
             elemn.botones.add(boton1)
             elemn.botones.add(boton2)
 
-    def execute_reward(self, casilla, boton):
+    def execute_reward(self, casilla, boton, **options):
         reward = None
         for artefacto in casilla.artefacto:
             reward = artefacto
@@ -137,26 +164,7 @@ class Inventario(pygame.sprite.Sprite):
             self.usage.play()
             self.usage.set_volume(0.5)
             #Deteccion de las recompensas para añadirla al inventario
-            if reward.id == 0:
-                if self.player.health < 500 and self.player.health > 0:
-                    if self.player.health == 495:
-                        self.player.health += 5
-                    else:
-                        self.player.health += 10
-            elif reward.id == 1:
-                for gen in self.gens_bob:
-                    for bob in gen.bobs:
-                        moneda = random.randrange(100)
-                        if moneda > 50:
-                            bob.sound(self.damageBob)
-                            bob.health -= 3
-                            #print('reduce vida Bob')
-            elif reward.id == 3:
-                self.player.cont_cats += 2
-
-            elif reward.id == 7:
-                self.player.health = 500
-
+            self.actions_to_execute.get(reward.id)()
             casilla.artefacto.remove(reward)
         elif boton == 1:
             self.delete.play()
